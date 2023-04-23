@@ -10,6 +10,8 @@ import jax
 import jax.numpy as jnp
 import optax
 
+from shrink_perturb import shrink_perturb
+
 @hk.without_apply_rng
 @hk.transform
 def mlp(x):
