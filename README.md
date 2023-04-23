@@ -1,4 +1,4 @@
-# Optax shrink and perturb 
+# Shrink-perturb 
 
 [Optax](https://github.com/deepmind/optax) implementation of shrink and perturb ([Ash & Adams, 2020](https://arxiv.org/abs/1910.08475)).
 
