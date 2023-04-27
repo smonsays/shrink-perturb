@@ -14,6 +14,7 @@ from typing import Callable, NamedTuple
 
 import chex
 import jax
+import jax.numpy as jnp
 from optax import GradientTransformation
 
 
@@ -36,7 +37,7 @@ def shrink_and_perturb(
         param_init_fn: Function to initialize params only taking rng as input
         shrink: Amount of shrinking
         perturb: Perturbation amount
-        every_n: only apply every nth update
+        every_n: only apply every n steps
         seed: Seed for random number generation.
     Returns:
         A `GradientTransformation` object.
@@ -49,8 +50,8 @@ def shrink_and_perturb(
     def update_fn(updates, state, params):  # pylint: disable=missing-docstring
         if params is None:
             raise ValueError(
-                'You are using a transformation that requires the current value of '
-                'parameters, but you are not passing `params` when calling `update`.'
+                "You are using a transformation that requires the current value of "
+                "parameters, but you are not passing `params` when calling `update`."
             )
         new_rng, rng_init = jax.random.split(state.rng_key, num=2)
         noise = param_init_fn(rng_init)
